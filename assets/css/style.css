@@ -1,0 +1,48 @@
+body {
+  background-image: url("../images/theater.jpg");
+  width: auto;
+  height: auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+}
+
+.container {
+	width: 60%;
+
+}
+
+h1 {
+	font-family: 'Bungee Inline', cursive;
+}
+
+h2 {
+	font-family: 'Bungee Inline', cursive;
+}
+
+.current {
+
+
+}
+
+.primary {
+
+
+}
+.jumbotron {
+	background: white;
+	border-style: dotted;
+	border-color: yellow;
+	border-width: 20px;
+
+}
+
+
+@media only screen and (min-width: 768px){
+	body{
+		background-image:url("../images/theater.jpg");
+			width: auto;
+			height: auto;
+			margin: 1px;
+			padding: 10px;
+		}
