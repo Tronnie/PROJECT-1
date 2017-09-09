@@ -107,17 +107,49 @@
   var projectLink = $("#githubInput").val().trim();
 
 
+  
+
+  console.log('work');
+
+
+  var queryURL = "https://api.github.com/users/"+userName+ "/repos";
+  console.log ("queryURL");
+
+  
+
+
+   
+ 
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+
+      .done(function(response) {
+
+        var results = response;
+        console.log("is this working?")
+
+        console.log(queryURL);
+        var avatar = response[0].owner.avatar_url;
+        console.log(response[0].owner.avatar_url);
+       
+
   datebase.ref().push({
     userName:userName,
     projectName:projectName,
     projectLink:projectLink,
+    avatar:avatar,
 
     
 
   });
-   });
+       
 
-  console.log('work');
+        
+      });
+         });
+     
 
 //upload project info/data to database
   //database.ref().push(newProjectInfo);
