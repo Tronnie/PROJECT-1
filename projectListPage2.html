@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Positive Portfolio Factor</title>
+  <!-- Link to the jQuery -->
+  <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+  <!-- Link to the Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- link to google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Cairo|Montserrat|Raleway|Titillium+Web" rel="stylesheet">
+  <!--Link to Firebase library-->
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <!--Moment js, date library for parsing, validating, manipulating, and formatting dates-->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.18.1/moment.min.js"></script>
+  <!-- style css file -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <!--project details; pull of html from github-->
+        <div class="row">
+          <div class ="col-lg-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class ="panel-title current"><strong>Listing of Recent Projects/page 2</strong></h3>
+                <!--<a href="#" class="thumbnail">
+                  <img src="https://www.wpfreeware.com/wp-content/uploads/2014/09/placeholder-images.jpg" alt="placeholderImage">
+                </a>-->
+        
+        <!--changes to replace placeholder, edit out-->
+
+
+                <!--API  Project users will Get Dumped Here -->
+                <div id = "projects-view"></div>
+                
+                <!-- API Rendered Buttons will get Dumped Here  -->
+                <div id="buttons-view"></div>
+
+                <form id="project-form">
+                <label for="project-input">Add a Project</label>
+                <input type="text" id="project-input"><br>
+
+      <!-- API Button triggers new project to be added -->
+      <input id="add-project" type="submit" value="Add a Project">
+      </form>
+
+       <!-- API UserProject Information -->
+  <div id="user-project-div"></div>
+
+
+
+
+              </div> <!--close panel-heading-->
+            </div> <!--close panel-primary-->
+
+<!--Firebase Project panel -->
+      <div class="row">
+      
+          <div class ="col-lg-12">
+
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class ="panel-title current"><strong>User info</strong></h3>
+              </div> <!--close panel-heading-->
+
+            <div class="panel-body">
+              <table class="table table-hover" id="projectTable">
+                <thread>
+                  <tr>
+                    <th>User Name</th>
+                   <!-- <th>Line</th>-->
+                    <th>Project Name</th><!-- project link listed-->
+                    <th>gitHubURL</th><!-- user link listed-->
+                    <!--<th>Date submitted</th>
+                    <th>Days since</th>-->
+                  </tr>
+                </thread>
+
+                <tbody>
+
+                </tbody>
+              </table>
+
+            </div> <!--close panel-body-->
+          </div> <!--close panel-primary-->
+
+<!--Remove after - Adding project-->
+    <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class ="panel-title addition"><strong>Add your project</strong></h3>
+            </div> <!--close panel-heading-->
+
+            <div class="panel-body">
+             <!--close panel body-->
+
+<!--Form-->
+      <form>
+          <div class ="form-group">
+            <label for="">User Name</label>
+            <input type="text" class="form-control" id="userNameInput">
+          </div>
+
+
+          <div class = "form-group">
+             <label for="">Project Name</label>
+             <input type="text" class="form-control" id="projectNameInput">
+          </div>
+
+          <div class = "form-group"><!--make a dropdown-->
+             <label for="">githubURL</label>
+             <input type="text" class="form-control" id="githubURLInput">
+          </div>
+
+         <!-- <div class = "form-group">
+             <label for="">Date Submitted</label>
+             <input type="text" class="form-control" id="submitDateInput">
+          </div>-->
+
+          <button type="submit" class="btn btn-primary" id="addProjectBtn">Submit
+          </button>
+          
+
+      </form>
+
+    </div>  <!--close panel body for adding projects-->
+  </div> <!--close panel-primary for adding projects-->
+</div> <!--close class col-lg-12-->
+</div>  <!--close class row for all-->
+
+
+
+
+</body>
+<footer>
+  <div class="row">
+    <div class ="col-lg-12">
+      <div class="panel panel">
+        <div class="panel-heading">
+          <p class ="panel-title current" style="text-align:center">&copy;2017 PWAG!</p>
+        </div> <!--close panel-heading-->
+      </div> <!--close class panel-primary-->
+    </div>  <!--close col-lg-12-->
+  </div> <!--close row-->
+</footer>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+ 
+ //firebase event to store info - remove when done
+ var config = {
+    apiKey: "AIzaSyDUFbkSrcv1by112f47fQfoTn9rUsjIGYo",
+    authDomain: "project-1-dc253.firebaseapp.com",
+    databaseURL: "https://project-1-dc253.firebaseio.com",
+    projectId: "project-1-dc253",
+    storageBucket: "project-1-dc253.appspot.com",
+    messagingSenderId: "838586150577"
+  };
+  firebase.initializeApp(config);
+  console.log(config);
+
+  var database = firebase.database();
+  console.log(database);
+
+   //check variables on submission page
+   $("#addProjectBtn").on("click", function(){
+
+    var userName= $("#userNameInput").val().trim();
+    var projectName = $("#projectNameInput").val().trim();
+    var githubURL = $("#gihubURLInput").val().trim();
+
+    //add moment js 
+    //var submitDate = moment($("#submitDateInput").val().trim(),"HH:mm").format("HH:mm");
+   // var daysSince = $("#daysSinceInput").val().trim();
+
+//create temp storage into an object of the user inputs; childSnapShot
+
+var newUsedInfo = {
+  name: userName,
+  project: projectName,
+  gitURL: githubURL
+
+  //ddSubmit: submitDate,
+  //ddSince: daysSince
+}
+
+//upload user data to database
+
+database.ref().push(newUserInfo);
+console.log(newUserInfo.name);
+
+//clears text from boxes. study .val()
+$("#userNameInput").val("");
+$("#projectNameInput").val("");
+$("#githubURLInput").val("");
+
+//$("#submitDateInput").val("");
+//$("#Input").val()
+
+
+//prevents going to new page
+//return false;
+
+});//close add train btn event
+
+//create firebase event
+database.ref().on("child_added", function(childSnapshot){//study firebase event and  childSnapShot
+  console.log(childSnapshot.val());
+
+//store childSnapShot values into a variable
+
+var userName=childSnapshot.val().name;
+var projectName=childSnapshot.val().project;
+var githubURL=childSnapshot.val().gitURL;
+
+//var submitDate =childSnapshot.val().ddSubmit;
+//var daysSince =childSnapshot.val().ddSince;
+
+
+//add tag to #projectTable at <tbody>
+$("#projectTable>tbody").append("<tr><td>" + userName + "</td><td><a>" + projectName + "<a></td><td><a>" + githubURL + "</a></td><td>"); 
+
+  //+ dateSubmit + "</td><td>" + daysSince +"</td><td>");
+});//close firebase on event
+
+
+
+
+
+//HOW? to click on link and pull API, how to connect what is in table to API
+
+ var githubUsers = ["pfleegmatic", "Tronnie"];
+ //var projectName  = 
+
+ // Function for dumping the JSON content for each button into the div
+      function displayUserInfo() {
+
+  var githubUser = $(this).attr("data-name");
+  var queryURL = "https://api.github.com/users/"+ githubUser +"/repos";
+
+ $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).done(function(response) {
+           // Printing the entire object to console
+          console.log(response);
+
+//API???
+      var userName = $("<h1>").text(response[0].login);
+       console.log(response[0].login);
+      var userURL = $("<a>").attr("href", response[0].html_url).append(userName);
+       console.log(response[0].html_url);
+      var userImage = $("<img>").attr("src", response[0].avatar_url);
+      console.log(response[0].avatar_url)
+      var projectDescription = $("<h2>").text(response[0].description);
+      console.log(response[0].description);
+
+ // Empty the contents of the artist-div, append the new artist content
+      $("#user-project-div").empty();
+      $("#user-project-div").append(userURL, userImage, projectDescription);
+
+      //$("#projects-view").html(JSON.stringify(response));
+          renderButtons();
+        });
+}
+
+
+
+
+// Function for displaying movie data
+      function renderButtons() {
+        // Deleting the buttons prior to adding new movies
+        // (this is necessary otherwise you will have repeat buttons)
+        $("#buttons-view").empty();
+
+        // Looping through the array of movies
+        for (var i = 0; i < githubUsers.length; i++) {
+
+          // Then dynamicaly generating buttons for each movie in the array
+          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          var a = $("<button>");
+
+          // Adding a class of movie to our button
+          a.addClass("githubUser");//added to button, see doc on for .githubUser
+          // Adding a data-attribute
+          a.attr("data-name", githubUsers[i]);
+          // Providing the initial button text
+          a.text(githubUsers[i]);
+          // Adding the button to the buttons-view div
+          $("#buttons-view").append(a);
+        
+        }//closes loop
+      }//closes render button function
+
+
+// This function handles events where one button is clicked
+      $("#add-project").on("click", function(event) {
+        event.preventDefault();
+
+        // This line grabs the input from the textbox
+        var githubUser = $("#project-input").val().trim();
+
+        // Adding the movie from the textbox to our array
+        githubUsers.push(githubUser);
+        console.log(githubUsers)
+
+        // Calling renderButtons which handles the processing of our movie array
+        renderButtons();
+      });
+
+      // Function for displaying the movie info
+      // Using $(document).on instead of $(".movie").on to add event listenersto dynamically generated elements
+      $(document).on("click", ".githubUser", displayUserInfo);
+
+      // Calling the renderButtons function to display the intial buttons
+      renderButtons();
+
+</script>
+
+
+
+</html>
