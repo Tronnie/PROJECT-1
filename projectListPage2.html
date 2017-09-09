@@ -248,12 +248,12 @@ $("#projectTable>tbody").append("<tr><td>" + userName + "</td><td><a>" + project
            // Printing the entire object to console
           console.log(response);
 
-//API???
-      var userName = $("<h1>").text(response[0].login);
+//API
+      var userName = $("<h1>").text(response[0].owner.login);
        console.log(response[0].login);
-      var userURL = $("<a>").attr("href", response[0].html_url).append(userName);
+      var userURL = $("<a>").attr("href", response[0].owner.html_url).append(userName);
        console.log(response[0].html_url);
-      var userImage = $("<img>").attr("src", response[0].avatar_url);
+      var userImage = $("<img>").attr("src", response[0].owner.avatar_url);
       console.log(response[0].avatar_url)
       var projectDescription = $("<h2>").text(response[0].description);
       console.log(response[0].description);
