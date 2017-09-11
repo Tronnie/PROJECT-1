@@ -82,6 +82,7 @@
 
 <!--javascript file-->
 <script type="text/javascript">
+  
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDe27JaRxwKau9DdMBa0wLQXaD7ivPqOPs",
@@ -92,15 +93,12 @@
     messagingSenderId: "223064031382"
   };
   firebase.initializeApp(config);
-  var datebase = firebase.database();
-  $("#addProjectBtn").on("click", function(event){
+
   event.preventDefault();
   var userName = $("#NameInput").val().trim();
   var projectName = $("#ProjNameInput").val().trim();
   var projectLink = $("#githubInput").val().trim();
-  console.log('work');
-  var queryURL = "https://api.github.com/users/"+userName+ "/repos";
-  console.log ("queryURL");
+
    function successCallback(){
      console.log("successCallback");
    }
@@ -108,35 +106,26 @@
      console.log("errorCallback");
      alert("check your spelling and capitalization");
    }
+
       $.ajax({
         url: queryURL,
         success:successCallback,
         error:errorCallback,
         method: "GET"
       })
-      .done(function(response) {
-        var results = response;
-        console.log("is this working?")
-        console.log(queryURL);
-        var avatar = response[0].owner.avatar_url;
-        console.log(response[0].owner.avatar_url);
+
   datebase.ref().push({
     userName:userName,
     projectName:projectName,
     projectLink:projectLink,
     avatar:avatar,
-  });
-  // $('#NameInput').load('./projectListPage.html', function(){  });
-// datebase().ref('userName' + userName).once('value').then(function(goToPage2) { .attr("./projectListPage")};
+
     // ...
   });
 // window.location.href = "./project-details.html";
       // });
 // location.replace("./projectListPage.html")
-    }); <!---->
-//upload project info/data to database
-  //database.ref().push(newProjectInfo);
-  //console.log(newProjectInfo.name);
+
   //clears text from boxes. study .val()
   //$("#proNameInput").val("");
  // $("#githubInput").val("");
@@ -145,26 +134,17 @@
   //prevents going to new page
   //return false;
   //});//close add project btn event
-  //create firebase event
-  //database.ref().on("child_added", function(childSnapshot){//study firebase event and  childSnapShot
-    //console.log(childSnapshot.val());
-  //store childSnapSot values into a variable
+
   //var projectName=childSnapshot.val().name;
   //var githubName=childSnapshot.val().place;
   //var dateSubmit=childSnapshot.val().firstProSubmit;
   //var comment =childSnapshot.val().frequency;
+
 //var firstTimeConverted = moment(firstProjectTime, "MM/DD/YY, HH:mm");
 //console.log(firstTimeConverted);
   //store format in current time
   // var currentDate = moment.unix(firstProjectTime).format("MM/DD/YY, HH:mm");
-  //var currentDate = moment().format("MM/DD/YY, HH:mm"); //study moment().format
-  //console.log("Date Submitted" + currentDate);
- // console.log(firstProjectTime);
-  //var diffDays = moment().diff(moment.unix(firstProjectTime, "X"), "days");
-    //console.log(diffDays);
-  //add tag to #projectTable at <tbody>
-  //$("#projectTable>tbody").append("<tr><td>" + projectName + "</td><td>" + githubName + "</td><td>" + dateSubmit + "</td><td>" + comment +"</td><td>");
- // });//close firebase on event
+
 // <tr> tag defines a row in an HTML table.
 // <td> regular cell in tale
 // <th> header cell in table
