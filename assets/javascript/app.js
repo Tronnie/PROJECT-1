@@ -1,4 +1,9 @@
+
 var config = {
+
+  // Initialize Firebase
+  var config = {
+
     apiKey: "AIzaSyDe27JaRxwKau9DdMBa0wLQXaD7ivPqOPs",
     authDomain: "positive-portfolio-factor.firebaseapp.com",
     databaseURL: "https://positive-portfolio-factor.firebaseio.com",
@@ -24,6 +29,12 @@ var config = {
 
   var queryURL = "https://api.github.com/users/"+userName+ "/repos";
   console.log ("queryURL");
+
+  
+
+  var queryURL = "https://api.github.com/users/"+userName+ "/repos";
+
+
 
    function successCallback(response){
        var results = response;
@@ -60,6 +71,7 @@ var config = {
         method: "GET"
       })
 
+
      
 
 
@@ -69,4 +81,9 @@ var config = {
 
 
 
+
+
+
+
+  });
 

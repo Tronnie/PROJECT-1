@@ -29,6 +29,11 @@ h2 {
 
 
 }
+
+#disqus_thread {
+	background: white
+}
+
 .jumbotron {
 	background: white;
 	border-style: dotted;
@@ -40,6 +45,9 @@ h2 {
 background-color: white;
 }
 
+#projectTable{
+	background-color: white;
+}
 
 @media only screen and (min-width: 768px){
 	body{
