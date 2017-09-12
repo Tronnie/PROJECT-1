@@ -21,10 +21,12 @@
     + projectLink+ "</td></tr>");
 
 
-// var urlTwo = "./project-details.html";
-//  window.location = urlTwo;
-
-});
-
-///project-details
+///project-details samples for dynamic
 // "#projectDetails"
+// $('#projectDetails').append("<tr><td>" + userName + "</td><td>"  + projectName + "</a></td><td>"
+//   + projectLink+ "</td></tr>");
+// console.log (userName);
+  // $("#projectDetails").html(snapshot.val().userName + " | " + snapshot.val().projectName+ " | " + snapshot.val().projectLink);
+// $('#projectDetails').html(userName);
+
+  });  //<--var datebase
