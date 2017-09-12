@@ -8,7 +8,6 @@
   };
   firebase.initializeApp(config);
 
-
   var database = firebase.database();
    database.ref().on('child_added', function(childSnapshot) {
 
@@ -26,3 +25,6 @@
 //  window.location = urlTwo;
 
 });
+
+///project-details
+// "#projectDetails"

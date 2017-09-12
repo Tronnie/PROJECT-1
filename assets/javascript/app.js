@@ -8,10 +8,7 @@ var config = {
   };
   firebase.initializeApp(config);
 
-
   var datebase = firebase.database();
-
-
 
   $("#addProjectBtn").on("click", function(event){
 
@@ -33,8 +30,6 @@ var config = {
        var avatar = response[0].owner.avatar_url;
        console.log(response[0].owner.avatar_url);
 
-
-
        datebase.ref().push({
          userName:userName,
          projectName:projectName,
@@ -42,16 +37,15 @@ var config = {
          avatar:avatar,
        }) //<----.datebase closure
 
-        //1.  switching pages:
+        // switching pages after firebase callback:
         var url = './projectListPage.html';
         window.location = url;
-
            console.log("successCallback");
-   }
-     function errorCallback(){
-      //  console.log("errorCallback");
+    } //<---function successCallback
+    function errorCallback(){
+       console.log("errorCallback");
       //  alert("check your spelling and capitalization");
-     }
+    } //<--function errorCallback
 
       $.ajax({
         url: queryURL,
@@ -59,9 +53,5 @@ var config = {
         error:errorCallback,
         method: "GET"
       })
-
-
-
-
 
     }); //<----.on ("click") closure
