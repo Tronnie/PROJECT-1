@@ -104,29 +104,42 @@
   $("#addProjectBtn").on("click", function(event){
 
   event.preventDefault();
+  // debugger;
   var userName = $("#NameInput").val().trim();
   var projectName = $("#ProjNameInput").val().trim();
   var projectLink = $("#githubInput").val().trim();
-
-
-
-
   console.log('work');
-
 
   var queryURL = "https://api.github.com/users/"+userName+ "/repos";
   console.log ("queryURL");
 
+   function successCallback(response){
+       var results = response;
+       console.log("is this working?")
+
+       console.log(queryURL);
+       var avatar = response[0].owner.avatar_url;
+       console.log(response[0].owner.avatar_url);
 
 
 
-   function successCallback(){
-     console.log("successCallback");
+       datebase.ref().push({
+         userName:userName,
+         projectName:projectName,
+         projectLink:projectLink,
+         avatar:avatar,
+       }) //<----.datebase closure
+
+        //1.  switching pages:
+        var url = './projectListPage.html';
+        window.location = url;
+
+           console.log("successCallback");
    }
-   function errorCallback(){
-     console.log("errorCallback");
-     alert("check your spelling and capitalization");
-   }
+     function errorCallback(){
+      //  console.log("errorCallback");
+      //  alert("check your spelling and capitalization");
+     }
 
       $.ajax({
         url: queryURL,
@@ -135,56 +148,32 @@
         method: "GET"
       })
 
-      .done(function(response) {
-
-        var results = response;
-        console.log("is this working?")
-
-        console.log(queryURL);
-        var avatar = response[0].owner.avatar_url;
-        console.log(response[0].owner.avatar_url);
-
-
-
-
-  datebase.ref().push({
-    userName:userName,
-    projectName:projectName,
-    projectLink:projectLink,
-    avatar:avatar,
-
-
-
-
-  });
+      // .done(function(response) {
+        //
+        // var results = response;
+        // console.log("is this working?")
+        //
+        // console.log(queryURL);
+        // var avatar = response[0].owner.avatar_url;
+        // console.log(response[0].owner.avatar_url);
+        //
+        //
+        // datebase.ref().push({
+        //   userName:userName,
+        //   projectName:projectName,
+        //   projectLink:projectLink,
+        //   avatar:avatar,
+        // }); //<----.datebase closure
+      // }) //<----.done closure
 
 
 
-
-  // $('#NameInput').load('./projectListPage.html', function(){  });
-// datebase().ref('userName' + userName).once('value').then(function(goToPage2) { .attr("./projectListPage")};
-
-    // ...
-  });
-// window.location.href = "./project-details.html";
-      // });
-// location.replace("./projectListPage.html")
-
-    }); <!---->
+    }); //<----.on ("click") closure
 
 
-//upload project info/data to database
-  //database.ref().push(newProjectInfo);
-  //console.log(newProjectInfo.name);
 
-  //clears text from boxes. study .val()
-  //$("#proNameInput").val("");
- // $("#githubInput").val("");
-  //$("#dateTimeInput").val("");
-  //$("#commentInput").val("");
-  //prevents going to new page
-  //return false;
-  //});//close add project btn event
+
+
 
   //create firebase event
   //database.ref().on("child_added", function(childSnapshot){//study firebase event and  childSnapShot
