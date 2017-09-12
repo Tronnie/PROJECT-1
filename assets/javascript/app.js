@@ -1,5 +1,9 @@
+
+var config = {
+
   // Initialize Firebase
   var config = {
+
     apiKey: "AIzaSyDe27JaRxwKau9DdMBa0wLQXaD7ivPqOPs",
     authDomain: "positive-portfolio-factor.firebaseapp.com",
     databaseURL: "https://positive-portfolio-factor.firebaseio.com",
@@ -21,9 +25,15 @@
   var userName = $("#NameInput").val().trim();
   var projectName = $("#ProjNameInput").val().trim();
   var projectLink = $("#githubInput").val().trim();
+  console.log('work');
+
+  var queryURL = "https://api.github.com/users/"+userName+ "/repos";
+  console.log ("queryURL");
+
   
 
   var queryURL = "https://api.github.com/users/"+userName+ "/repos";
+
 
 
    function successCallback(response){
@@ -61,7 +71,19 @@
         method: "GET"
       })
 
-   
+
+     
+
+
+
+    }); //<----.on ("click") closure
+
+
+
+
+
+
 
 
   });
+
