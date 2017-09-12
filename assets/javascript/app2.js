@@ -1,4 +1,3 @@
-
   var config = {
     apiKey: "AIzaSyDe27JaRxwKau9DdMBa0wLQXaD7ivPqOPs",
     authDomain: "positive-portfolio-factor.firebaseapp.com",
@@ -16,8 +15,8 @@
   var userName = childSnapshot.val().userName;
   var projectName = childSnapshot.val().projectName;
   var projectLink = childSnapshot.val().projectLink;
-  
-  console.log("yaaa");
+
+  console.log("firebase data is loading");
 
   $('#projectTable').append("<tr><td><a href='./project-details.html'>" + userName + "</td><td>"  + projectName + "</a></td><td>"
     + projectLink+ "</td></tr>");
