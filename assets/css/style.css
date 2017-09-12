@@ -29,6 +29,11 @@ h2 {
 
 
 }
+
+#disqus_thread {
+	background: white
+}
+
 .jumbotron {
 	background: white;
 	border-style: dotted;
