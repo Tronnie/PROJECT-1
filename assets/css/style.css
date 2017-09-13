@@ -20,15 +20,12 @@ h2 {
 	font-family: 'Bungee Inline', cursive;
 }
 
-.current {
 
-
+.panel-body {
+	background-color: lightblue;
+	background: lightblue;
 }
 
-.primary {
-
-
-}
 
 #disqus_thread {
 	background: white
@@ -48,6 +45,8 @@ background-color: white;
 #projectTable{
 	background-color: white;
 }
+
+
 
 @media only screen and (min-width: 768px){
 	body{
